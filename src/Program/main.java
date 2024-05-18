@@ -1,5 +1,6 @@
 package Program;
 
+import Program.Organizmy.Rosliny.BarszczSosnowskiego;
 import Program.Organizmy.Rosliny.Trawa;
 
 import java.util.ArrayList;
@@ -11,8 +12,10 @@ public class main {
         int wysokosc = 20, szerokosc = 20;
         Swiat swiat = new Swiat(wysokosc, szerokosc, organizmy);
 
-        Trawa r1 = new Trawa(swiat,3,5, 1);
-        swiat.dodajOrganizm(r1);
+        BarszczSosnowskiego o1 = new BarszczSosnowskiego(swiat,3,5, 1);
+        swiat.dodajOrganizm(o1);
+        Trawa o2 = new Trawa(swiat,3,4,1);
+        swiat.dodajOrganizm(o2);
         swiat.nastepnaTura();
         swiat.nastepnaTura();
         swiat.nastepnaTura();

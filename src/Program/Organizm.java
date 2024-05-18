@@ -24,39 +24,39 @@ public abstract class Organizm {
     }
 
     //getery
-    int getSila(){
+    public int getSila(){
         return  sila;
     }
-    int getInicjatywa(){
+    public int getInicjatywa(){
         return inicjatywa;
     }
-    int getPozycjaX(){
+    public int getPozycjaX(){
         return pozycjaX;
     }
-    int getPozycjaY(){
+    public int getPozycjaY(){
         return pozycjaY;
     }
-    int getWiek(){
+    public int getWiek(){
         return wiek;
     }
-    int getZdolnosc(){
+    public int getZdolnosc(){
         return zdolnosc;
     }
 
     //setery
-    void setSila(int sila){
+    public void setSila(int sila){
         this.sila = sila;
     }
-    void setInicjatywa(int inicjatywa){
+    public void setInicjatywa(int inicjatywa){
         this.inicjatywa = inicjatywa;
     }
-    void setPozycjaX(int x){
+    public void setPozycjaX(int x){
         this.pozycjaX = x;
     }
-    void setPozycjaY(int y){
+    public void setPozycjaY(int y){
         this.pozycjaY = y;
     }
-    void setZdolnosc(int zdolnosc){
+    public void setZdolnosc(int zdolnosc){
         this.zdolnosc = zdolnosc;
     }
 
@@ -70,7 +70,5 @@ public abstract class Organizm {
     public abstract void kolizja(Organizm organizm);
     public abstract void wypisz();
     public abstract boolean czyOdbil(Organizm organizm);
-
-    //override
 
 }
