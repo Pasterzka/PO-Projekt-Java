@@ -7,6 +7,15 @@ import Program.Zwierze;
 import java.awt.*;
 
 public class Owca extends Zwierze {
+    public Owca(int inicjatywa, int sila, int x, int y, int wiek, Swiat swiat, int zdolnosc){
+        super(swiat);
+        this.pozycjaX = x;
+        this.pozycjaY = y;
+        this.wiek = wiek;
+        this.inicjatywa = inicjatywa;
+        this.sila = sila;
+        this.zdolnosc = 0;
+    }
     public Owca(Swiat swiat){
         super(swiat);
     }

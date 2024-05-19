@@ -7,6 +7,15 @@ import Program.Zwierze;
 import java.awt.*;
 
 public class Lis extends Zwierze {
+    public Lis(int inicjatywa, int sila, int x, int y, int wiek, Swiat swiat, int zdolnosc){
+        super(swiat);
+        this.pozycjaX = x;
+        this.pozycjaY = y;
+        this.wiek = wiek;
+        this.inicjatywa = inicjatywa;
+        this.sila = sila;
+        this.zdolnosc = 0;
+    }
     public Lis(Swiat swiat){
         super(swiat);
     }

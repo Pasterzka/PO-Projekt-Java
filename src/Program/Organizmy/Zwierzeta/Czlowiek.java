@@ -18,6 +18,15 @@ public class Czlowiek extends Zwierze {
         this.sila = 5;
         this.zdolnosc =10;
     }
+    public Czlowiek(int inicjatywa, int sila, int x, int y, int wiek, Swiat swiat, int zdolnosc){
+        super(swiat);
+        this.pozycjaX = x;
+        this.pozycjaY = y;
+        this.wiek = wiek;
+        this.inicjatywa = inicjatywa;
+        this.sila = sila;
+        this.zdolnosc = zdolnosc;
+    }
 
     public void akcja(){
         Scanner scanner = new Scanner(System.in);

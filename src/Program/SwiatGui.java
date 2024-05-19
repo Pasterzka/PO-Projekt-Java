@@ -9,10 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 
 public class SwiatGui extends JPanel {
     private Swiat swiat;
     private JButton nextTurnButton;
+    private JButton saveButton;
     private JTextArea logArea;
 
     private int tileSize =25;
@@ -20,6 +25,7 @@ public class SwiatGui extends JPanel {
 
     public SwiatGui(Swiat swiat) {
         this.swiat = swiat;
+
         JFrame frame = new JFrame("Symulacja Świata");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
@@ -39,6 +45,16 @@ public class SwiatGui extends JPanel {
             }
         });
         buttonPanel.add(nextTurnButton);
+
+        // Przycisk do zapisu gry
+        saveButton = new JButton("Zapisz grę");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                swiat.zapisz();
+            }
+        });
+        buttonPanel.add(saveButton);
 
         // Panel z logami
         logArea = new JTextArea(10, 30);
@@ -114,4 +130,5 @@ public class SwiatGui extends JPanel {
     public void updateLog() {
         logArea.setText(swiat.getLog());
     }
+
 }

@@ -7,6 +7,15 @@ import Program.Swiat;
 import java.awt.*;
 
 public class Guarana extends Roslina {
+    public Guarana(int inicjatywa, int sila, int x, int y, int wiek, Swiat swiat, int zdolnosc){
+        super(swiat);
+        this.pozycjaX = x;
+        this.pozycjaY = y;
+        this.wiek = wiek;
+        this.inicjatywa = inicjatywa;
+        this.sila = sila;
+        this.zdolnosc = 0;
+    }
     public Guarana(Swiat swiat) {
         super(swiat);
         this.inicjatywa = 0;
