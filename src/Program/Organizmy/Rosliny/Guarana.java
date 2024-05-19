@@ -34,7 +34,15 @@ public class Guarana extends Roslina {
 
     @Override
     public void kolizja(Organizm organizm) {
+        String log;
         organizm.setSila(organizm.getSila() + 3);
+        log = organizm.getClass().getSimpleName() + " z (" + organizm.getPozycjaX() + " " + organizm.getPozycjaY() + ") niszczy Guarana  z (" + this.pozycjaX + " " + this.pozycjaY + ").\n";
+        swiat.dodajLog(log);
+        int x = this.getPozycjaX();
+        int y = this.getPozycjaY();
+        swiat.usunOrganizm(swiat.getIndexOrganizmu(pozycjaX, pozycjaY));
+        organizm.setPozycjaX(x);
+        organizm.setPozycjaY(y);
     }
 
     @Override

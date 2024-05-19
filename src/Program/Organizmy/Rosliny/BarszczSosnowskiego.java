@@ -8,13 +8,13 @@ public class BarszczSosnowskiego extends Roslina {
     public BarszczSosnowskiego(Swiat swiat) {
         super(swiat);
         this.inicjatywa = 0;
-        this.sila = 0;
+        this.sila = 10;
     }
 
     public BarszczSosnowskiego(Swiat swiat, int x, int y) {
         super(swiat);
         this.inicjatywa = 0;
-        this.sila = 0;
+        this.sila = 10;
         this.pozycjaX = x;
         this.pozycjaY = y;
     }
@@ -22,7 +22,7 @@ public class BarszczSosnowskiego extends Roslina {
     public BarszczSosnowskiego(Swiat swiat, int x, int y, int wiek) {
         super(swiat);
         this.inicjatywa = 0;
-        this.sila = 0;
+        this.sila = 10;
         this.pozycjaX = x;
         this.pozycjaY = y;
         this.wiek = wiek;

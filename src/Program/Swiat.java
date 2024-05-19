@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Swiat {
     private List<Organizm> organizmy;
+    private SwiatGui swiatGUI;
 
     private int szerokosc;
     private int wysokosc;
@@ -20,11 +21,13 @@ public class Swiat {
         this.wysokosc = wysokosc;
         this.organizmy = organizmy;
         this.tura = tura;
+        this.log = ""; // Inicjalizacja logów
     }
     Swiat(int wysokosc, int szerokosc, List<Organizm> organizmy){
         this.szerokosc = szerokosc;
         this.wysokosc = wysokosc;
         this.organizmy = organizmy;
+        this.log = ""; // Inicjalizacja logów
     }
 
     //getery
@@ -55,6 +58,9 @@ public class Swiat {
     }
     public void dodajLog(String log) {
         this.log += log;
+        if (swiatGUI != null) {
+            swiatGUI.updateLog(); // Aktualizacja logów w GUI
+        }
     }
     public void setSzerokosc(int szerokosc) {
         this.szerokosc = szerokosc;
@@ -65,11 +71,18 @@ public class Swiat {
 
     //dodanie organizmu
     public void dodajOrganizm(Organizm organizm) {
-        this.organizmy.add(organizm);
-        this.organizmy.sort((a, b) -> Integer.compare(b.getInicjatywa(), a.getInicjatywa()));
-        if (organizm.getInicjatywa() > this.organizmy.get(globalIndex).getInicjatywa()) {
-            globalIndex++;
+
+        if (!this.czyOrganizmXY(organizm.getPozycjaX(), organizm.getPozycjaY()) && organizm.getPozycjaX()>=1 && organizm.getPozycjaX()<=this.getSzerokosc() && organizm.getPozycjaY()>=1 && organizm.getPozycjaY()<=this.getWysokosc()) {
+            this.organizmy.add(organizm);
+            this.organizmy.sort((a, b) -> Integer.compare(b.getInicjatywa(), a.getInicjatywa()));
+            if (organizm.getInicjatywa() > this.organizmy.get(globalIndex).getInicjatywa()) {
+                globalIndex++;
+            }
+        }else{
+            this.dodajLog("Nie można dodać organizmu!!!!\n");
         }
+
+
     }
 
     //następna tura
@@ -82,8 +95,10 @@ public class Swiat {
             }
             organizmy.get(globalIndex).dorastanie();
         }
-        System.out.println(log);
-        czyscLog();
+
+        if (swiatGUI != null) {
+            swiatGUI.repaint();
+        }
     }
 
     //dorastanie początek gry
@@ -123,6 +138,16 @@ public class Swiat {
         return null;  // Jeśli nie znaleziono
     }
 
+    public List<Organizm> getOrganizmy() {
+        return organizmy;
+    }
 
+    public void setSwiatGUI(SwiatGui swiatGui) {
+        this.swiatGUI = swiatGui;
+    }
+
+    public String getLog() {
+        return log;
+    }
 
 }

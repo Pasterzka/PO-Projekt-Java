@@ -36,6 +36,14 @@ public class Mlecz extends Roslina {
 
     @Override
     public void kolizja(Organizm organizm) {
+        String log;
+        log = organizm.getClass().getSimpleName() + " z (" + organizm.getPozycjaX() + " " + organizm.getPozycjaY() + ") niszczy Mlecz  z (" + this.pozycjaX + " " + this.pozycjaY + ").\n";
+        swiat.dodajLog(log);
+        int x = this.getPozycjaX();
+        int y = this.getPozycjaY();
+        swiat.usunOrganizm(swiat.getIndexOrganizmu(x,y));
+        organizm.setPozycjaX(x);
+        organizm.setPozycjaY(y);
     }
 
     @Override

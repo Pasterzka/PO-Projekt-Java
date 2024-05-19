@@ -83,7 +83,7 @@ public abstract class Roslina extends Organizm{
     }
 
     void SprawdzenieMiejsca(int noweX, int noweY){
-        if (this.pozycjaY != noweY || this.pozycjaX != noweX){
+        if ((this.pozycjaY != noweY || this.pozycjaX != noweX) && noweX >= 1 && noweX <= swiat.getSzerokosc() && noweY >=1 && noweY <= swiat.getWysokosc()){
             if (!swiat.czyOrganizmXY(noweX, noweY)){
                 dodanie(noweX, noweY);
             }else{

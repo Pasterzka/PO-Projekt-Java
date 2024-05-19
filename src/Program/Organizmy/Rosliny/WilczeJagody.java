@@ -8,13 +8,13 @@ public class WilczeJagody extends Roslina {
     public WilczeJagody(Swiat swiat) {
         super(swiat);
         this.inicjatywa = 0;
-        this.sila = 0;
+        this.sila = 100;
     }
 
     public WilczeJagody(Swiat swiat, int x, int y) {
         super(swiat);
         this.inicjatywa = 0;
-        this.sila = 0;
+        this.sila = 100;
         this.pozycjaX = x;
         this.pozycjaY = y;
     }
@@ -22,7 +22,7 @@ public class WilczeJagody extends Roslina {
     public WilczeJagody(Swiat swiat, int x, int y, int wiek) {
         super(swiat);
         this.inicjatywa = 0;
-        this.sila = 0;
+        this.sila = 100;
         this.pozycjaX = x;
         this.pozycjaY = y;
         this.wiek = wiek;
