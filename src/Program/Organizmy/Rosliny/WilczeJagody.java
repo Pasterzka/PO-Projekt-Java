@@ -4,6 +4,8 @@ import Program.Organizm;
 import Program.Roslina;
 import Program.Swiat;
 
+import java.awt.*;
+
 public class WilczeJagody extends Roslina {
     public WilczeJagody(Swiat swiat) {
         super(swiat);
@@ -50,7 +52,12 @@ public class WilczeJagody extends Roslina {
     }
 
     @Override
-    public void wypisz() {
+    public void wypisz(Graphics g) {
+        g.setColor(Color.decode("#FF00FF"));
+    }
+    @Override
+    protected void ucieczka(Organizm organizm) {
+
     }
 
     @Override

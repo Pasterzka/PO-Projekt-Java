@@ -2,6 +2,8 @@ package Program;
 
 import Program.Swiat;
 
+import java.awt.*;
+
 public abstract class Organizm {
     protected int sila;
     protected int inicjatywa;
@@ -68,7 +70,8 @@ public abstract class Organizm {
     //funkcje abstrakcyjne
     public abstract void akcja();
     public abstract void kolizja(Organizm organizm);
-    public abstract void wypisz();
+    public abstract void wypisz(Graphics g);
     public abstract boolean czyOdbil(Organizm organizm);
 
+    protected abstract void ucieczka(Organizm organizm);
 }

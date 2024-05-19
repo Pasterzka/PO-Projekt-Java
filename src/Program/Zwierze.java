@@ -1,5 +1,9 @@
 package Program;
 
+import Program.Organizmy.Zwierzeta.Antylopa;
+
+import java.awt.*;
+
 public abstract class Zwierze extends Organizm{
     public Zwierze(Swiat swiat) {
         super(swiat);
@@ -58,30 +62,38 @@ public abstract class Zwierze extends Organizm{
             organizm.kolizja(this);
         } else {
             if (organizm.czyOdbil(this)) {
-                log = organizm.getClass().getSimpleName() + " z (" + organizm.getPozycjaX() + " " + organizm.getPozycjaY() + ") odbił atak " + this.getClass().getSimpleName() + "z (" + this.getPozycjaY() + " " + this.getPozycjaY() + ").\n";
+                log = organizm.getClass().getSimpleName() + " z (" + organizm.getPozycjaX() + " " + organizm.getPozycjaY() + ") odbił atak " + this.getClass().getSimpleName() + " z (" + this.getPozycjaY() + " " + this.getPozycjaY() + ").\n";
                 swiat.dodajLog(log);
-            } else if (this.getSila() >= organizm.getSila()) {
-                if (this.getSila() >= organizm.getSila()) {
-                    log = this.getClass().getSimpleName() + " z (" + this.getPozycjaX() + " " + this.getPozycjaY() + ") niszczy " + organizm.getClass().getSimpleName() + "z (" + organizm.getPozycjaY() + " " + organizm.getPozycjaY() + ").\n";
-                    swiat.dodajLog(log);
-                    int pomX = organizm.getPozycjaX();
-                    int pomY = organizm.getPozycjaY();
-                    swiat.usunOrganizm(swiat.getIndexOrganizmu(pomX, pomY));
-                    this.setPozycjaY(pomY);
-                    this.setPozycjaX(pomX);
-                } else {
-                    log = organizm.getClass().getSimpleName() + " z (" + organizm.getPozycjaX() + " " + organizm.getPozycjaY() + ") niszczy atakujacego " + this.getClass().getSimpleName() + "z (" + this.getPozycjaY() + " " + this.getPozycjaY() + ").\n";
-                    swiat.dodajLog(log);
-                    int pomX = this.getPozycjaX();
-                    int pomY = this.getPozycjaY();
-                    swiat.usunOrganizm(swiat.getIndexOrganizmu(pomX, pomY));
-                }
+            } else if (organizm instanceof Antylopa) {
+                organizm.ucieczka(this);
+            }
+            else{
+                bojka(organizm);
             }
         }
     }
 
+    protected void bojka(Organizm organizm){
+        String log;
+        if (this.getSila() >= organizm.getSila()) {
+            log = this.getClass().getSimpleName() + " z (" + this.getPozycjaX() + " " + this.getPozycjaY() + ") niszczy " + organizm.getClass().getSimpleName() + " z (" + organizm.getPozycjaY() + " " + organizm.getPozycjaY() + ").\n";
+            swiat.dodajLog(log);
+            int pomX = organizm.getPozycjaX();
+            int pomY = organizm.getPozycjaY();
+            swiat.usunOrganizm(swiat.getIndexOrganizmu(pomX, pomY));
+            this.setPozycjaY(pomY);
+            this.setPozycjaX(pomX);
+        } else {
+            log = organizm.getClass().getSimpleName() + " z (" + organizm.getPozycjaX() + " " + organizm.getPozycjaY() + ") niszczy atakujacego " + this.getClass().getSimpleName() + "z (" + this.getPozycjaY() + " " + this.getPozycjaY() + ").\n";
+            swiat.dodajLog(log);
+            int pomX = this.getPozycjaX();
+            int pomY = this.getPozycjaY();
+            swiat.usunOrganizm(swiat.getIndexOrganizmu(pomX, pomY));
+        }
+    }
+
     @Override
-    public void wypisz() {
+    public void wypisz(Graphics g) {
 
     }
 
@@ -90,7 +102,7 @@ public abstract class Zwierze extends Organizm{
         return false;
     }
 
-    void ruch(int noweX, int noweY){
+    protected void ruch(int noweX, int noweY){
         String log;
         if (noweX >= 1 && noweX <= swiat.getSzerokosc() && noweY >=1 && noweY <= swiat.getWysokosc()){
             if (!swiat.czyOrganizmXY(noweX, noweY)){

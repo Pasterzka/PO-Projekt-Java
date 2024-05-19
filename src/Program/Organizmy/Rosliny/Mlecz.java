@@ -4,6 +4,8 @@ import Program.Organizm;
 import Program.Roslina;
 import Program.Swiat;
 
+import java.awt.*;
+
 public class Mlecz extends Roslina {
     public Mlecz(Swiat swiat) {
         super(swiat);
@@ -47,12 +49,18 @@ public class Mlecz extends Roslina {
     }
 
     @Override
-    public void wypisz() {
+    public void wypisz(Graphics g) {
+        g.setColor(Color.YELLOW);
     }
 
     @Override
     public boolean czyOdbil(Organizm organizm) {
         return false;
+    }
+
+    @Override
+    protected void ucieczka(Organizm organizm) {
+
     }
 
     @Override

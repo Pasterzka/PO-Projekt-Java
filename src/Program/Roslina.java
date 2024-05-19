@@ -1,5 +1,7 @@
 package Program;
 
+import java.awt.*;
+
 public abstract class Roslina extends Organizm{
 
     public Roslina(Swiat swiat) {
@@ -25,7 +27,7 @@ public abstract class Roslina extends Organizm{
     }
 
     @Override
-    public void wypisz() {
+    public void wypisz(Graphics g) {
     }
 
     @Override

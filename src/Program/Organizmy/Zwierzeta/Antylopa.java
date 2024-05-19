@@ -1,38 +1,73 @@
 package Program.Organizmy.Zwierzeta;
 
 import Program.Organizm;
-import Program.Organizmy.Rosliny.Trawa;
 import Program.Swiat;
 import Program.Zwierze;
 
 import java.awt.*;
 
-public class Wilk extends Zwierze {
-    public Wilk(Swiat swiat){
+public class Antylopa extends Zwierze {
+    public Antylopa(Swiat swiat){
         super(swiat);
     }
-    public Wilk(Swiat swiat, int x, int y, int wiek){
+    public Antylopa(Swiat swiat, int x, int y, int wiek){
         super(swiat);
         this.pozycjaX = x;
         this.pozycjaY = y;
         this.wiek = wiek;
-        this.inicjatywa = 5;
-        this.sila = 9;
+        this.inicjatywa = 4;
+        this.sila = 4;
     }
-    public Wilk(Swiat swiat, int x, int y){
+    public Antylopa(Swiat swiat, int x, int y){
         super(swiat);
         this.pozycjaX = x;
         this.pozycjaY = y;
-        this.inicjatywa = 5;
-        this.sila = 9;
-    }
-    @Override
-    protected void ucieczka(Organizm organizm) {
-
+        this.inicjatywa = 4;
+        this.sila = 4;
     }
 
     @Override public void akcja(){
-        super.akcja();
+        int kierunek = (int) (Math.random()*8);
+        if (kierunek == 0){
+            int noweX = this.pozycjaX - 2;
+            int noweY = this.pozycjaY;
+            super.ruch(noweX, noweY);
+        }
+        else if (kierunek == 1){
+            int noweX = this.pozycjaX - 2;
+            int noweY = this.pozycjaY - 2;
+            super.ruch(noweX, noweY);
+        }
+        else if (kierunek == 2){
+            int noweX = this.pozycjaX;
+            int noweY = this.pozycjaY - 2;
+            super.ruch(noweX, noweY);
+        }
+        else if (kierunek == 3){
+            int noweX = this.pozycjaX + 2;
+            int noweY = this.pozycjaY - 2;
+            super.ruch(noweX, noweY);
+        }
+        else if (kierunek == 4){
+            int noweX = this.pozycjaX + 2;
+            int noweY = this.pozycjaY;
+            super.ruch(noweX, noweY);
+        }
+        else if (kierunek == 5){
+            int noweX = this.pozycjaX + 2;
+            int noweY = this.pozycjaY + 2;
+            super.ruch(noweX, noweY);
+        }
+        else if (kierunek == 6){
+            int noweX = this.pozycjaX;
+            int noweY = this.pozycjaY + 2;
+            super.ruch(noweX, noweY);
+        }
+        else if (kierunek == 7){
+            int noweX = this.pozycjaX - 2;
+            int noweY = this.pozycjaY + 2;
+            super.ruch(noweX, noweY);
+        }
     }
 
     @Override
@@ -45,7 +80,7 @@ public class Wilk extends Zwierze {
     }
 
     @Override public void wypisz(Graphics g){
-        g.setColor(Color.BLACK);
+        g.setColor(Color.decode("#E9967A"));
     }
 
     @Override
@@ -147,7 +182,7 @@ public class Wilk extends Zwierze {
         String log;
         if (x >= 1 && x <= swiat.getSzerokosc() && y >=1 && y <= swiat.getWysokosc()){
             if (!swiat.czyOrganizmXY(x,y)){
-                swiat.dodajOrganizm(new Wilk(swiat, x, y));
+                swiat.dodajOrganizm(new Antylopa(swiat, x, y));
                 log = this.getClass().getSimpleName() + " z (" + this.pozycjaX + " " + this.pozycjaY + ") rozmnozyla sie na (" + x + " " + y + ").\n";
                 swiat.dodajLog(log);
             }else{
@@ -160,4 +195,71 @@ public class Wilk extends Zwierze {
         }
 
     }
+
+    protected void ucieczka(Organizm organizm){
+        int szansa = (int) (Math.random()*2);
+        if (szansa == 1){
+            ucieczkakod(organizm);
+        }else{
+            bojka(organizm);
+        }
+    }
+
+    void ucieczkakod(Organizm organizm){
+        int x = this.getPozycjaX();
+        int y = this.getPozycjaY();
+        if (poleDoUcieczki(x-1,y)){
+            int noweX = x-1;
+            int noweY = y;
+            przesun(organizm, noweX, x, noweY, y);
+        }else if (poleDoUcieczki(x-1,y-1)){
+            int noweX = x-1;
+            int noweY = y-1;
+            przesun(organizm, noweX, x, noweY, y);
+        }else if (poleDoUcieczki(x,y-1)){
+            int noweX = x;
+            int noweY = y-1;
+            przesun(organizm, noweX, x, noweY, y);
+        }else if (poleDoUcieczki(x+1,y-1)){
+            int noweX = x+1;
+            int noweY = y-1;
+            przesun(organizm, noweX, x, noweY, y);
+        }else if (poleDoUcieczki(x+1,y)){
+            int noweX = x+1;
+            int noweY = y;
+            przesun(organizm, noweX, x, noweY, y);
+        }else if (poleDoUcieczki(x+1,y+1)){
+            int noweX = x+1;
+            int noweY = y+1;
+            przesun(organizm, noweX, x, noweY, y);
+        }else if (poleDoUcieczki(x,y+1)){
+            int noweX = x;
+            int noweY = y+1;
+            przesun(organizm, noweX, x, noweY, y);
+        }else if (poleDoUcieczki(x-1,y+1)){
+            int noweX = x-1;
+            int noweY = y+1;
+            przesun(organizm, noweX, x, noweY, y);
+        }else{
+            super.bojka(organizm);
+        }
+
+    }
+
+    void przesun(Organizm organizm, int x, int noweX, int y, int noweY){
+        swiat.dodajLog(organizm.getClass().getSimpleName() + " z (" + organizm.getPozycjaX() + " " + organizm.getPozycjaY() + ") przemieszcza sie na (" + x + " " + y + ").\n");
+        organizm.setPozycjaX(x);
+        organizm.setPozycjaY(y);
+        swiat.dodajLog(this.getClass().getSimpleName() + " z (" + this.getPozycjaX() + " " + this.getPozycjaY() + ") ucieka na (" + noweX + " " + noweY + ").\n");
+        this.setPozycjaX(noweX);
+        this.setPozycjaY(noweY);
+    }
+
+    boolean poleDoUcieczki(int x,int y){
+        if (swiat.czyOrganizmXY(x,y) && x>=1 && y>=1 && x<=swiat.getSzerokosc() && y<=swiat.getWysokosc()){
+            return false;
+        }
+        return true;
+    }
 }
+

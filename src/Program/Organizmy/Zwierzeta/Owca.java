@@ -4,6 +4,8 @@ import Program.Organizm;
 import Program.Swiat;
 import Program.Zwierze;
 
+import java.awt.*;
+
 public class Owca extends Zwierze {
     public Owca(Swiat swiat){
         super(swiat);
@@ -37,8 +39,8 @@ public class Owca extends Zwierze {
         }
     }
 
-    @Override public void wypisz(){
-
+    @Override public void wypisz(Graphics g){
+        g.setColor(Color.GRAY);
     }
 
     @Override
@@ -46,12 +48,21 @@ public class Owca extends Zwierze {
         return false;
     }
 
+    @Override
+    protected void ucieczka(Organizm organizm) {
+
+    }
+
     void rozmnazanie(Organizm organizm){
-        int rodzic = (int) (Math.random()*2);
-        if (rodzic == 0){
-            rodzic1();
+        if (this.getWiek()>3 && organizm.getWiek()>3){
+            int rodzic = (int) (Math.random()*2);
+            if (rodzic == 0){
+                rodzic1();
+            }else{
+                rodzic2(organizm);
+            }
         }else{
-            rodzic2(organizm);
+            swiat.dodajLog(this.getClass().getSimpleName() + " z (" + this.getPozycjaX() + " " + this.getPozycjaY() + ") oraz " + organizm.getClass().getSimpleName() + " z (" + this.getPozycjaX() + " " + this.getPozycjaY() + ") za mlodzi aby sie rozmoznyc.\n");
         }
     }
 

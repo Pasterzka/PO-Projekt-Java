@@ -1,38 +1,39 @@
 package Program.Organizmy.Zwierzeta;
 
 import Program.Organizm;
-import Program.Organizmy.Rosliny.Trawa;
 import Program.Swiat;
 import Program.Zwierze;
 
 import java.awt.*;
 
-public class Wilk extends Zwierze {
-    public Wilk(Swiat swiat){
+public class Zolw extends Zwierze {
+    public Zolw(Swiat swiat){
         super(swiat);
     }
-    public Wilk(Swiat swiat, int x, int y, int wiek){
+    public Zolw(Swiat swiat, int x, int y, int wiek){
         super(swiat);
         this.pozycjaX = x;
         this.pozycjaY = y;
         this.wiek = wiek;
-        this.inicjatywa = 5;
-        this.sila = 9;
+        this.inicjatywa = 1;
+        this.sila = 2;
     }
-    public Wilk(Swiat swiat, int x, int y){
+    public Zolw(Swiat swiat, int x, int y){
         super(swiat);
         this.pozycjaX = x;
         this.pozycjaY = y;
-        this.inicjatywa = 5;
-        this.sila = 9;
-    }
-    @Override
-    protected void ucieczka(Organizm organizm) {
-
+        this.inicjatywa = 1;
+        this.sila = 2;
     }
 
     @Override public void akcja(){
-        super.akcja();
+        int szansa = (int) (Math.random()*4);
+        if (szansa==0){
+            super.akcja();
+        }else{
+            swiat.dodajLog(this.getClass().getSimpleName() + " z (" + this.getPozycjaX() + " " + this.getPozycjaY() + ") nie poruszyl się, za mala sznsa na ruch.\n");
+        }
+
     }
 
     @Override
@@ -45,12 +46,16 @@ public class Wilk extends Zwierze {
     }
 
     @Override public void wypisz(Graphics g){
-        g.setColor(Color.BLACK);
+        g.setColor(Color.decode("#2E8B57"));
     }
 
     @Override
     public boolean czyOdbil(Organizm organizm) {
-        return false;
+        if (organizm.getSila() > 5) {
+            return false;
+        }else{
+            return true;
+        }
     }
 
     void rozmnazanie(Organizm organizm){
@@ -64,6 +69,11 @@ public class Wilk extends Zwierze {
         }else{
             swiat.dodajLog(this.getClass().getSimpleName() + " z (" + this.getPozycjaX() + " " + this.getPozycjaY() + ") oraz " + organizm.getClass().getSimpleName() + " z (" + this.getPozycjaX() + " " + this.getPozycjaY() + ") za mlodzi aby sie rozmoznyc.\n");
         }
+    }
+
+    @Override
+    protected void ucieczka(Organizm organizm) {
+
     }
     void rodzic1(){
         int kierunek = (int) (Math.random()*8);
@@ -147,7 +157,7 @@ public class Wilk extends Zwierze {
         String log;
         if (x >= 1 && x <= swiat.getSzerokosc() && y >=1 && y <= swiat.getWysokosc()){
             if (!swiat.czyOrganizmXY(x,y)){
-                swiat.dodajOrganizm(new Wilk(swiat, x, y));
+                swiat.dodajOrganizm(new Zolw(swiat, x, y));
                 log = this.getClass().getSimpleName() + " z (" + this.pozycjaX + " " + this.pozycjaY + ") rozmnozyla sie na (" + x + " " + y + ").\n";
                 swiat.dodajLog(log);
             }else{

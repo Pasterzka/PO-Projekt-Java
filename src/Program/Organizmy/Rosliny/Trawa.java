@@ -4,6 +4,8 @@ import Program.Organizm;
 import Program.Roslina;
 import Program.Swiat;
 
+import java.awt.*;
+
 public class Trawa extends Roslina {
     public Trawa(Swiat swiat) {
         super(swiat);
@@ -45,8 +47,12 @@ public class Trawa extends Roslina {
     }
 
     @Override
-    public void wypisz() {
+    protected void ucieczka(Organizm organizm) {
 
+    }
+    @Override
+    public void wypisz(Graphics g) {
+        g.setColor(Color.green);
     }
 
     @Override

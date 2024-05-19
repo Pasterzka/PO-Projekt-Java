@@ -4,6 +4,8 @@ import Program.Organizm;
 import Program.Roslina;
 import Program.Swiat;
 
+import java.awt.*;
+
 public class BarszczSosnowskiego extends Roslina {
     public BarszczSosnowskiego(Swiat swiat) {
         super(swiat);
@@ -51,12 +53,18 @@ public class BarszczSosnowskiego extends Roslina {
     }
 
     @Override
-    public void wypisz() {
+    public void wypisz(Graphics g) {
+        g.setColor(Color.decode("#48D1CC"));
     }
 
     @Override
     public boolean czyOdbil(Organizm organizm) {
         return false;
+    }
+
+    @Override
+    protected void ucieczka(Organizm organizm) {
+
     }
 
     @Override

@@ -1,7 +1,7 @@
 package Program;
 
-import Program.Organizmy.Rosliny.Trawa;
-import Program.Organizmy.Zwierzeta.Wilk;
+import Program.Organizmy.Rosliny.*;
+import Program.Organizmy.Zwierzeta.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,15 +15,15 @@ public class SwiatGui extends JPanel {
     private JButton nextTurnButton;
     private JTextArea logArea;
 
-    private int tileSize;
-    private int padding;
+    private int tileSize =25;
+    private int padding =2;
 
     public SwiatGui(Swiat swiat) {
         this.swiat = swiat;
         JFrame frame = new JFrame("Symulacja Świata");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
-
+        frame.setSize(800, 600);
+        frame.setMinimumSize(new Dimension( 800, 600));
         this.setLayout(new BorderLayout());
 
         // Panel z przyciskiem
@@ -48,7 +48,7 @@ public class SwiatGui extends JPanel {
         // Panel z polem wyboru organizmu
         JPanel selectPanel = new JPanel();
         selectPanel.add(new JLabel("Wybierz organizm:"));
-        String[] organisms = {"Trawa", "Wilk"}; // Dodaj więcej opcji według potrzeb
+        String[] organisms = {"Trawa", "Wilk", "Owca", "Barszcz Sosnowskiego", "Guarana", "Mlecz", "Wilcze Jagody", "Zolw", "Lis", "Antylopa"};
         JComboBox organismSelection = new JComboBox<>(organisms);
         selectPanel.add(organismSelection);
 
@@ -70,6 +70,22 @@ public class SwiatGui extends JPanel {
                     swiat.dodajOrganizm(new Trawa(swiat,x, y));
                 } else if (selectedOrganism.equals("Wilk")) {
                     swiat.dodajOrganizm(new Wilk(swiat,x, y));
+                } else if (selectedOrganism.equals("Owca")) {
+                    swiat.dodajOrganizm(new Owca(swiat,x, y));
+                } else if (selectedOrganism.equals("Guarana")) {
+                    swiat.dodajOrganizm(new Guarana(swiat,x, y));
+                } else if (selectedOrganism.equals("Barszcz Sosnowskiego")) {
+                    swiat.dodajOrganizm(new BarszczSosnowskiego(swiat,x, y));
+                } else if (selectedOrganism.equals("Mlecz")) {
+                    swiat.dodajOrganizm(new Mlecz(swiat,x, y));
+                } else if (selectedOrganism.equals("Wilcze Jagody")) {
+                    swiat.dodajOrganizm(new WilczeJagody(swiat,x, y));
+                } else if (selectedOrganism.equals("Zolw")) {
+                    swiat.dodajOrganizm(new Zolw(swiat,x, y));
+                } else if (selectedOrganism.equals("Lis")) {
+                    swiat.dodajOrganizm(new Lis(swiat,x, y));
+                } else if (selectedOrganism.equals("Antylopa")) {
+                    swiat.dodajOrganizm(new Antylopa(swiat,x, y));
                 }
                 repaint();
             }
@@ -79,24 +95,19 @@ public class SwiatGui extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        tileSize = Math.min(getWidth() / swiat.getSzerokosc(), getHeight() / swiat.getWysokosc());
-        tileSize = Math.max(tileSize / 2, 5); // Zmniejszamy rozmiar organizmów
-        padding = 2; // Dodajemy odstęp pomiędzy polami
+        tileSize = 25;
+        padding = 2;
 
-        int boardWidth = swiat.getSzerokosc() * (tileSize + padding); // Usuwamy padding na krawędziach planszy
+        int boardWidth = swiat.getSzerokosc() * (tileSize + padding);
         int boardHeight = swiat.getWysokosc() * (tileSize + padding);
 
         // Rysujemy ramkę planszy
         g.drawRect(padding + tileSize, padding + tileSize, boardWidth, boardHeight);
 
         for (Organizm organizm : swiat.getOrganizmy()) {
-            int x = organizm.getPozycjaX() * (tileSize + padding) + padding; // Dodajemy padding dla pozycji x i y
+            int x = organizm.getPozycjaX() * (tileSize + padding) + padding; // Dodawanie padding dla pozycji x i y
             int y = organizm.getPozycjaY() * (tileSize + padding) + padding;
-            if (organizm instanceof Trawa) {
-                g.setColor(Color.GREEN);
-            } else if (organizm instanceof Wilk) {
-                g.setColor(Color.RED);
-            }
+            organizm.wypisz(g);
             g.fillRect(x, y, tileSize, tileSize);
         }
     }
